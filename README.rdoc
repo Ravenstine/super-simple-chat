@@ -1,0 +1,28 @@
+== README
+
+This is a simple chat that I have made using ActionController::Live.
+It requires no database or model.  However, you will need:
+
+* Rails >= 4.0.0
+* Ruby >= 1.9
+* Puma
+
+== Sever Sent Events
+
+The Live feature in ActionController allows the app to send events from the server to the client.  This means the server can trigger something to happen in JavaScript without the need for WebSockets or other protocols.
+
+I've come to realize that ActionController::Live is alpha software, in spite of it having been released in Rails 4.  Not only is it missing an important feature(which I had to create using a hack) but there are small bugs that happen for unkown reasons(like the notification subscription not being able to directly write to the stream and throwing an unrecoverable error).
+
+Still, I think this little chat app should be helpful for anyone who wants to understand how server-sent events can be accomplished in Rails.  It uses a default stack(aside from Puma), and extra features to the chat can be added very easily once you understand what's going on.
+
+I made a few hacks to work around the shortcomings of ActionController::Live.  The biggest hack is the use of creating a separate Ruby thread to create a "heartbeat" to detect when a user has left the chat in order to close the connection.  I am a novice programmer so I am not aware of any reason why this is an unacceptable solution.
+
+== Installation
+Just:
+<tt>bundle install</tt>
+then:
+<tt>rails s</tt>
+
+== License
+
+This app is public domain.  Have at it!

@@ -1,0 +1,17 @@
+var source = new EventSource('/stream')
+
+source.addEventListener('message', function(event){
+	var data = JSON.parse(event.data)
+	console.log(event.data)
+	$('div').append(event.data)
+})
+
+$(document).on('click', '#send_message', function(e){
+	e.preventDefault()
+	console.log('send button clicked')
+	$.ajax({
+		type: 'POST',
+		url: '/create',
+		data: {'body': $('#new_message').val()}
+	})
+})
