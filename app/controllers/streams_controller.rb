@@ -3,7 +3,6 @@ class StreamsController < ApplicationController
 
   def stream
     response.headers['Content-Type'] = 'text/event-stream'
-    # @payload = nil
 
     # Subscribe the current user to message notifications.
     ActiveSupport::Notifications.subscribe('message') do |name, start, finish, id, payload|
