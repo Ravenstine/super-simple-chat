@@ -27,7 +27,7 @@ In this case, the routing proxy that Heroku uses prevents the server from knowin
 However, enabling WebSockets seems to solve this problem.  You can do this by going to the root directory of your project and running the following:
 <tt>heroku labs:enable websockets</tt>
 
-I'm not 100% sure why this works; I suspect that it configures the routing in a way that makes it support WebSockets in a way that happens to also benefit ActionController::Live.  Now response.stream.closed? will return true when the stream is dead.  Let's hope that Heroku keeps this feature!
+I'm not 100% sure why this works; I suspect that it configures the routing in a way that makes it support WebSockets in a way that happens to also benefits ActionController::Live.  Now response.stream.closed? will return true when the stream is dead.  Let's hope that Heroku keeps this feature!
 
 == License
 
