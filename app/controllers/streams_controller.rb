@@ -3,6 +3,7 @@ class StreamsController < ApplicationController
 
   def stream
     response.headers['Content-Type'] = 'text/event-stream'
+    response.headers['X-Accel-Buffering'] = 'no'
 
     # Subscribe the current user to message notifications.
     message_monitor = ActiveSupport::Notifications.subscribe('message') do |name, start, finish, id, payload|
@@ -19,7 +20,7 @@ class StreamsController < ApplicationController
     loop do
       sleep 0.1.seconds
       response.stream.write "event: message\ndata: #{@payload} \n\n" unless @payload == nil
-      if @heartbeat == true
+      if @heartbeat
         response.stream.write "event: heartbeat\ndata: \n\n"
         @heartbeat = false
       end
